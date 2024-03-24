@@ -28,22 +28,45 @@ class Circle {
   }
 }
 
+function newCircle() {
+  let x = random(width);
+  let y = random(height);
+
+  let valid = true;
+  for (let i = 0; i < circles.length; i++) {
+    let c = circles[i];
+    let d = dist(x, y, c.x, c.y);
+    if (d < c.r) {
+      valid = false;
+      break;
+    }
+  }
+
+
+  if (valid) {
+    return new Circle(x, y, 0);
+  }
+  else {
+    return null;
+  }
+}
 
 let circles = [];
 
 function setup() {
-  createCanvas(900, 900);
+  createCanvas(700, 700);
 }
 
 
 function draw() {
   background(0, 0, 0);
 
-  frameRate(10); // Slow down the animation
-  let x = random(width);
-  let y = random(height);
-  let circle = new Circle(x, y, 0); // Start with a radius of 0
-  circles.push(circle);
+  frameRate(20); // Slow down the animation
+  
+  let newC = newCircle();
+  if (newC != null) {
+    circles.push(newC);
+  }
 
   for (let i = 0; i < circles.length; i++) {
     let c = circles[i];
