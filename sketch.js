@@ -11,7 +11,20 @@ class Circle {
   
   grow() {
     if (this.growing) {
-      this.r += 0.5;
+      this.r += 0.5;  // rate at which circle radius grows
+      if (this.edges()) {
+        this.growing = false;
+      } else {
+        for (let other of circles) {
+          if (this != other) {
+            let d = dist(this.x, this.y, other.x, other.y);
+            if (d - 2 < this.r + other.r) {
+              this.growing = false;
+              break;
+            }
+          }
+        }
+      }
     }
   }
   
@@ -23,7 +36,7 @@ class Circle {
     // fill(this.color); // Set fill color 
     noFill(); // Remove fill color
     stroke(this.color); // Set border color to white
-    strokeWeight(1); // Set border thickness
+    strokeWeight(1.5); // Set border thickness
     ellipse(this.x, this.y, this.r * 2, this.r * 2);
   }
 }
@@ -54,27 +67,24 @@ function newCircle() {
 let circles = [];
 
 function setup() {
-  createCanvas(700, 700);
+  createCanvas(1900, 1000);
 }
 
 
 function draw() {
   background(0, 0, 0);
 
-  frameRate(20); // Slow down the animation
+  frameRate(50); // Slow down the animation
   
-  let newC = newCircle();
+  let newC = newCircle();  
   if (newC != null) {
     circles.push(newC);
   }
 
   for (let i = 0; i < circles.length; i++) {
     let c = circles[i];
-    
-    if (c.edges()) {
-      c.growing = false;
-    }
+    c.grow();          
     c.show();
-    c.grow();
-  }
+    
+    }
 }
