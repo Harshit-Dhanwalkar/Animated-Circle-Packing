@@ -1,4 +1,3 @@
-
 class Circle {
   constructor(x, y, r) {
     this.x = x;
@@ -77,8 +76,20 @@ function draw() {
   frameRate(50); // Slow down the animation
   
   let newC = newCircle();  
-  if (newC != null) {
-    circles.push(newC);
+
+  let total = 10000;  // Number of circles to be drawn
+  let count = 0; // Number of circles drawn
+  let attempts = 0; // Number of attempts to draw a circle
+  if (circles.length < total) {
+    if (newC != null) {
+      circles.push(newC);
+      count++;
+    }
+    attempts++;
+    if (attempts > 100) {
+      noLoop();
+      console.log("Finished");
+      }
   }
 
   for (let i = 0; i < circles.length; i++) {
