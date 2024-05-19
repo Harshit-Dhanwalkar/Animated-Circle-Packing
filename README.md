@@ -16,3 +16,5 @@ This project is a simple p5.js sketch that creates growing circles and also at t
 [Harshit-Dhanwalkar](https://github.com/Harshit-Dhanwalkar)
 
 This project is open source. Check out the code on [GitHub](https://github.com/Harshit-Dhanwalkar/Animated-Circle-Packing).
+
+Changes
